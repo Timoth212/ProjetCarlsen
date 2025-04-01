@@ -2,11 +2,13 @@ import pygame  # type: ignore
 
 from const import *
 from board import Board
+from dragger import Dragger
 
 class Game():
 
     def __init__(self):
         self.board = Board()
+        self.dragger = Dragger()
 
     def show_background(self, surface):
         '''
@@ -16,7 +18,7 @@ class Game():
             -surface : la taille de la fenetre à remplir 
 
         output:
-            - Creation des cases de l'échiquier
+            -Creation des cases de l'échiquier
         '''
         for row in range(rows):
             for col in range (cols):
@@ -32,11 +34,11 @@ class Game():
         for row in range(rows):
             for col in range (cols):
 
-                if self.board.squares[row][col].has_piece(): #Il y a t-il une piece sur la case?
+                if self.board.squares[row][col].has_piece(): #Il y a t-il une piece sur la case? Si oui je l'affiche
                     piece = self.board.squares[row][col].piece
                     
                     img = pygame.image.load(piece.image) #je charge l'image de la piece
                     img_center = col*square_size + square_size//2, row*square_size + square_size//2
                     piece.image_rect = img.get_rect(center = img_center) # je centre l'image sur le centre de la case occupée
                     
-                    surface.blit(img, piece.image_rect) #affcieh l'image
+                    surface.blit(img, piece.image_rect) #affiche l'image
