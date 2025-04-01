@@ -48,5 +48,8 @@ class Board:
         self.squares [row_others][4] = Square(row_pawns,4, King(color))
 
     def new_piece_position(self, piece, old_position, new_position):
-        self.squares[old_position[1]][old_position[0]].piece = None
+        self.squares[old_position[0]][old_position[1]].piece = None
         self.squares[new_position[0]][new_position[1]].piece = piece
+        piece.moved = True
+
+    
