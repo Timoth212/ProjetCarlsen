@@ -48,7 +48,8 @@ class Main():
 
                     if dragger.piece != None and event.button == 3 : # Si une piece à déjà été séléctionnée
                         ###On indique la nouvelle position de la piece à l'échiquier
-                        board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [clicked_row,clicked_col]) 
+                        if (clicked_row,clicked_col) in dragger.piece.moves:
+                            board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [clicked_row,clicked_col]) 
 
                         dragger.undrag_piece()
                         
@@ -73,7 +74,8 @@ class Main():
 
                     if dragger.dragging and (declicked_row,declicked_col) != (dragger.initial_row,dragger.initial_col):
                         ###On indique la nouvelle position de la piece à l'échiquier
-                        board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [declicked_row,declicked_col]) 
+                        if (declicked_row,declicked_col) in dragger.piece.moves:
+                            board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [declicked_row,declicked_col]) 
                         dragger.undrag_piece()
 
 

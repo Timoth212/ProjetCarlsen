@@ -52,4 +52,8 @@ class Board:
         self.squares[new_position[0]][new_position[1]].piece = piece
         piece.moved = True
 
+        if piece.name == 'pawn' and (new_position[0] == 0 or new_position[0] == 7) : 
+            print("attention...")
+            piece.promote()
+
     
