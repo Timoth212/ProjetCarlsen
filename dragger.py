@@ -18,8 +18,8 @@ class Dragger():
         (self.mouseX, self.mouseY) = position
 
     def save_initial(self,position):
-        self.initial_row = int(position[1]//square_size)
-        self.initial_col = int(position[0]//square_size)
+        self.initial_row = position[1]
+        self.initial_col = position[0]
 
     def drag_piece(self, piece):
         self.piece = piece
