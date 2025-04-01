@@ -24,3 +24,13 @@ class Dragger():
     def drag_piece(self, piece):
         self.piece = piece
         self.dragging = True
+
+    def show_drag(self,surface):
+
+        img = pygame.image.load(self.piece.image)
+        self.piece.image_rect = img.get_rect(center = (self.mouseX,self.mouseY)) 
+        surface.blit(img, self.piece.image_rect) #affiche l'image
+
+    def undrag_piece(self):
+        self.piece = None
+        self.dragging = False

@@ -37,8 +37,10 @@ class Game():
                 if self.board.squares[row][col].has_piece(): #Il y a t-il une piece sur la case? Si oui je l'affiche
                     piece = self.board.squares[row][col].piece
                     
-                    img = pygame.image.load(piece.image) #je charge l'image de la piece
-                    img_center = col*square_size + square_size//2, row*square_size + square_size//2
-                    piece.image_rect = img.get_rect(center = img_center) # je centre l'image sur le centre de la case occupée
+                    if piece != self.dragger.piece:
+                        img = pygame.image.load(piece.image) #je charge l'image de la piece
+                        img_center = col*square_size + square_size//2, row*square_size + square_size//2
+                        piece.image_rect = img.get_rect(center = img_center) # je centre l'image sur le centre de la case occupée
                     
-                    surface.blit(img, piece.image_rect) #affiche l'image
+                        surface.blit(img, piece.image_rect) #affiche l'image
+    
