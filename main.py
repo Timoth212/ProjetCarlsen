@@ -25,19 +25,18 @@ class Main():
             # Affichage principal
             game.show_background(screen)  # Redessine l'échiquier
             game.show_pieces(screen)  # Redessine toutes les pièces
+            
 
             # Si une pièce est en cours de déplacement, on l'affiche par-dessus
             if dragger.dragging:
                 dragger.show_drag(screen)
-
-                dragger.piece.possible_moves(dragger,board)
-                game.show_possible_moves(screen, dragger,board)
+                game.show_piece_possible_moves(screen,dragger)
             
             for event in pygame.event.get():
                   
-
                 #click
                 if event.type == pygame.MOUSEBUTTONDOWN :
+
                     ##Calcule la position de la case
                     dragger.update_mouse(event.pos)
 
@@ -49,7 +48,7 @@ class Main():
                     if dragger.piece != None and event.button == 3 : # Si une piece à déjà été séléctionnée
                         ###On indique la nouvelle position de la piece à l'échiquier
                         if (clicked_row,clicked_col) in dragger.piece.moves:
-                            board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [clicked_row,clicked_col]) 
+                            board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [clicked_row,clicked_col])
 
                         dragger.undrag_piece()
                         
@@ -57,13 +56,12 @@ class Main():
 
                         dragger.save_initial((clicked_row, clicked_col)) #On sauvegarde la position initiale
                         dragger.drag_piece(board.squares[clicked_row][clicked_col].piece) #On indique que la piece séléctionnée est en mouvement
-  
+                        dragger.piece.possible_moves(board)
 
                 #Souris en mouvement 
                 elif event.type == pygame.MOUSEMOTION:
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
-
 
                 # dé-click
                 elif event.type == pygame.MOUSEBUTTONUP:
@@ -75,9 +73,9 @@ class Main():
                     if dragger.dragging and (declicked_row,declicked_col) != (dragger.initial_row,dragger.initial_col):
                         ###On indique la nouvelle position de la piece à l'échiquier
                         if (declicked_row,declicked_col) in dragger.piece.moves:
-                            board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [declicked_row,declicked_col]) 
+                            board.new_piece_position(dragger.piece, [dragger.initial_row,dragger.initial_col], [declicked_row,declicked_col])
+                            #board.is_checked() 
                         dragger.undrag_piece()
-
 
                 #Quitter
                 elif event.type == pygame.QUIT:

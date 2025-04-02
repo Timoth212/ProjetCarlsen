@@ -6,11 +6,15 @@ from board import Board
 from dragger import Dragger
 
 class Game():
+    '''
+    Il s'agit de l'echiquier graphique
+    '''
 
     def __init__(self):
         self.board = Board()
         self.dragger = Dragger()
 
+#Affichage
     def show_background(self, surface):
         '''
         Méthode pour créer les cases de l'échiquier graphique
@@ -44,7 +48,8 @@ class Game():
                         piece.image_rect = img.get_rect(center = img_center) # je centre l'image sur le centre de la case occupée
                     
                         surface.blit(img, piece.image_rect) #affiche l'image
-    def show_possible_moves(self,surface,dragger,board):
+
+    def show_piece_possible_moves(self,surface,dragger):
 
         piece = dragger.piece
         moves = piece.moves
@@ -57,14 +62,11 @@ class Game():
             if  board.squares[row][col].piece != None:
                 ind = os.path.join(f'images/red.png')'
             '''
-
             indicator = pygame.image.load(ind) #je charge l'image de la piece
             ind_center = row*square_size + square_size//2, col*square_size + square_size//2
             piece.image_rect = indicator.get_rect(center = ind_center) # je centre l'image sur le centre de la case occupée
                     
             surface.blit(indicator, piece.image_rect) #affiche l'image
-            
-
 
 
 
